@@ -1,12 +1,12 @@
 package com.ktruong.instagram;
 
 import android.net.Uri;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ListView;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -18,7 +18,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -110,6 +109,10 @@ public class Instagram extends ActionBarActivity {
                         JSONObject imagesJson = photoJson.getJSONObject("images");
                         String standardImgUrl = imagesJson.getJSONObject("standard_resolution").getString("url");
                         instagramPhoto.setImageUrl(Uri.parse(standardImgUrl));
+
+                        long createLongSec = photoJson.getLong("created_time");
+                        CharSequence createdTimeStr = DateUtils.getRelativeTimeSpanString(createLongSec * 1000, System.currentTimeMillis(), DateUtils.HOUR_IN_MILLIS);
+                        instagramPhoto.setCreatedTime(createdTimeStr.toString());
 
                         photos.add(instagramPhoto);
                     }

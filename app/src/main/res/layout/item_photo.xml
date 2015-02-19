@@ -11,6 +11,31 @@
         android:maxWidth="15dp"
         android:maxHeight="15dp"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="some name"
+        android:ems="10"
+        android:id="@+id/userName"
+        android:layout_toRightOf="@+id/profileImage"
+        android:layout_toEndOf="@+id/profileImage"
+        android:typeface="serif"
+        android:textStyle="normal"
+        android:textAlignment="center"
+        android:elegantTextHeight="true" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="DateTime"
+        android:id="@+id/createdTime"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,10 +53,12 @@
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/commentText"
-        android:layout_alignBottom="@+id/profileImage"
+        android:layout_marginBottom="10dp"
+        android:layout_alignBottom="@+id/photoImage"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
 
 </RelativeLayout>

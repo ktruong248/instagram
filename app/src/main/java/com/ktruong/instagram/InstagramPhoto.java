@@ -10,6 +10,15 @@ public class InstagramPhoto {
     private Uri profileImageUrl;
     private int commentCount;
     private Uri imageUrl;
+    private String createdTime;
+
+    public String getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(String createdTime) {
+        this.createdTime = createdTime;
+    }
 
     public String getName() {
         return name;

@@ -2,7 +2,6 @@ package com.ktruong.instagram;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Movie;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import com.makeramen.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,9 +44,17 @@ public class InstagramPhotoAdapter extends ArrayAdapter<InstagramPhoto> {
                 .build();
         Picasso.with(getContext()).load(item.getProfileImageUrl()).transform(transformation).resize(150,0).into(profileImage);
 
+        TextView userNameText = (TextView) convertView.findViewById(R.id.userName);
+        userNameText.setText(item.getName());
+        userNameText.setTextColor(Color.BLUE);
+
         ImageView photoImageView = (ImageView) convertView.findViewById(R.id.photoImage);
         photoImageView.setImageResource(0);
         Picasso.with(getContext()).load(item.getImageUrl()).into(photoImageView);
+
+        TextView createdTimeView = (TextView) convertView.findViewById(R.id.createdTime);
+        createdTimeView.setText(item.getCreatedTime());
+        createdTimeView.setFreezesText(true);
 
 //        TextView commentText = (TextView)convertView.findViewById(R.id.commentText);
 //        commentText.setText(item.getComment());
