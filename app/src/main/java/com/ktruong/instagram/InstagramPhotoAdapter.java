@@ -20,49 +20,91 @@ import java.util.List;
  */
 public class InstagramPhotoAdapter extends ArrayAdapter<InstagramPhoto> {
 
+    // View lookup cache
+    private static class ViewHolder {
+        ImageView profileImage;
+        TextView userNameText;
+        TextView createdTimeView;
+        ImageView photoImageView;
+        TextView captionText;
+        TextView captionUserName;
+    }
+
     public InstagramPhotoAdapter(Context context, List<InstagramPhoto> photos) {
-        super(context,0, photos);
+        super(context, 0, photos);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
+        ViewHolder viewHolder;
+
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_photo, parent, false);
+
+            viewHolder = new ViewHolder();
+            viewHolder.profileImage = (ImageView) convertView.findViewById(R.id.profileImage);
+            viewHolder.userNameText = (TextView) convertView.findViewById(R.id.userName);
+            viewHolder.createdTimeView = (TextView) convertView.findViewById(R.id.createdTime);
+            viewHolder.captionText = (TextView) convertView.findViewById(R.id.captionText);
+            viewHolder.captionUserName = (TextView) convertView.findViewById(R.id.captionUserName);
+            viewHolder.photoImageView = (ImageView) convertView.findViewById(R.id.photoImage);
+
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
         InstagramPhoto item = getItem(position);
-        ImageView profileImage = (ImageView)convertView.findViewById(R.id.profileImage);
+//        ImageView profileImage = (ImageView) convertView.findViewById(R.id.profileImage);
+        ImageView profileImage = viewHolder.profileImage;
         profileImage.setImageResource(0); //clear
 
-        Transformation transformation = new RoundedTransformationBuilder()
-                .borderColor(Color.TRANSPARENT).scaleType(ImageView.ScaleType.FIT_CENTER)
-                .borderWidthDp(3)
+        if (item.getProfileImageUrl() != null) {
+            Transformation transformation = new RoundedTransformationBuilder()
+                    .borderColor(Color.TRANSPARENT).scaleType(ImageView.ScaleType.FIT_CENTER)
+                    .borderWidthDp(3)
 //                .cornerRadius(500)
-                .cornerRadiusDp(30)
+                    .cornerRadiusDp(30)
 //                .oval(true)
-                .build();
-        Picasso.with(getContext()).load(item.getProfileImageUrl()).transform(transformation).resize(150,0).into(profileImage);
+                    .build();
+            Picasso.with(getContext()).load(item.getProfileImageUrl()).transform(transformation).resize(150, 0).into(profileImage);
+        } else {
+            profileImage.setImageResource(R.mipmap.ic_launcher);
+        }
 
-        TextView userNameText = (TextView) convertView.findViewById(R.id.userName);
+//        TextView userNameText = (TextView) convertView.findViewById(R.id.userName);
+        TextView userNameText = viewHolder.userNameText;
         userNameText.setText(item.getName());
-        userNameText.setTextColor(Color.BLUE);
+//        userNameText.setTextColor(Color.BLUE);
 
-        ImageView photoImageView = (ImageView) convertView.findViewById(R.id.photoImage);
+//        ImageView photoImageView = (ImageView) convertView.findViewById(R.id.photoImage);
+        ImageView photoImageView = viewHolder.photoImageView;
         photoImageView.setImageResource(0);
-        Picasso.with(getContext()).load(item.getImageUrl()).into(photoImageView);
+        if (item.getImageUrl() != null) {
+            Picasso.with(getContext()).load(item.getImageUrl()).into(photoImageView);
+        } else {
+            photoImageView.setImageResource(R.mipmap.ic_launcher);
+        }
 
-        TextView createdTimeView = (TextView) convertView.findViewById(R.id.createdTime);
+//        TextView createdTimeView = (TextView) convertView.findViewById(R.id.createdTime);
+        TextView createdTimeView = viewHolder.createdTimeView;
         createdTimeView.setText(item.getCreatedTime());
         createdTimeView.setFreezesText(true);
 
-//        TextView commentText = (TextView)convertView.findViewById(R.id.commentText);
-//        commentText.setText(item.getComment());
+//        TextView captionText = (TextView) convertView.findViewById(R.id.captionText);
+        TextView captionText = viewHolder.captionText;
+        captionText.setText(item.getCaption());
 
-        // findByviewId also slow so there are technique to optimized
-//        tvTitle.setText(item.getTitle());
-//        tvScore.setText(item.creditScoreLabel());
+        //
 
+//        TextView captionUserName = (TextView) convertView.findViewById(R.id.captionUserName);
+        TextView captionUserName = viewHolder.captionUserName;
+        captionUserName.setText(item.getCaptionFromUserName());
+//
+//        ImageView likeImageView = (ImageView)convertView.findViewById(R.id.likeImage);
+//        Picasso.with(getContext()).load("https://www.iconfinder.com/icons/299063/download/png/128").centerCrop().resize(80,80).into(likeImageView);
+//
         return convertView;
     }
 }

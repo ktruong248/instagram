@@ -8,6 +8,8 @@
         android:id="@+id/profileImage"
         android:layout_alignParentTop="true"
         android:scaleType="fitXY"
+        android:minHeight="15dp"
+        android:minWidth="15dp"
         android:maxWidth="15dp"
         android:maxHeight="15dp"/>
 
@@ -15,14 +17,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="some name"
-        android:ems="10"
+        android:text="user name"
         android:id="@+id/userName"
         android:layout_toRightOf="@+id/profileImage"
-        android:layout_toEndOf="@+id/profileImage"
         android:typeface="serif"
-        android:textStyle="normal"
-        android:textAlignment="center"
+        android:textColor="#ff167bff"
+        android:textSize="20sp"
         android:elegantTextHeight="true" />
 
 
@@ -40,25 +40,46 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/photoImage"
-        android:layout_alignParentBottom="@+id/profileImage"
-        android:scaleType="fitEnd"
-        android:layout_below="@+id/profileImage"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:adjustViewBounds="true" />
+        android:minWidth="50dp"
+        android:paddingBottom="5dp"
+        android:adjustViewBounds="true"
+        android:layout_below="@+id/profileImage" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/commentText"
-        android:layout_marginBottom="10dp"
-        android:layout_alignBottom="@+id/photoImage"
+        android:inputType="textPersonName"
+        android:text="caption username"
+        android:id="@+id/captionUserName"
+        android:layout_below="@+id/photoImage"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:textColor="#ff167bff" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="some caption text"
+        android:ems="10"
+        android:id="@+id/captionText"
+        android:inputType="textMultiLine"
+        android:layout_below="@+id/photoImage"
+        android:layout_toRightOf="@+id/captionUserName"
+        android:singleLine="true"
+        android:gravity="left"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
+    <!-- likes -->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/likeImage"
+        android:src="@drawable/heart_basic_blue"
+        android:minWidth="50dp"
+        android:minHeight="50dp"
+        android:paddingBottom="5dp"
+        android:adjustViewBounds="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/captionUserName" />
 
 </RelativeLayout>

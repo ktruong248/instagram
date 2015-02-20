@@ -8,9 +8,11 @@ public class InstagramPhoto {
     private String userFullName;
     private long id;
     private Uri profileImageUrl;
-    private int commentCount;
+    private int likeCounts;
     private Uri imageUrl;
     private String createdTime;
+    private String caption;
+    private String captionFromUserName;
 
     public String getCreatedTime() {
         return createdTime;
@@ -52,12 +54,12 @@ public class InstagramPhoto {
         this.profileImageUrl = profileImageUrl;
     }
 
-    public int getCommentCount() {
-        return commentCount;
+    public int getLikeCounts() {
+        return likeCounts;
     }
 
-    public void setCommentCount(int commentCount) {
-        this.commentCount = commentCount;
+    public void setLikesCount(int commentCount) {
+        this.likeCounts = commentCount;
     }
 
     public void setImageUrl(Uri imageUrl) {
@@ -66,5 +68,21 @@ public class InstagramPhoto {
 
     public Uri getImageUrl() {
         return imageUrl;
+    }
+
+    public String getCaption() {
+        return caption;
+    }
+
+    public void setCaption(String caption) {
+        this.caption = caption;
+    }
+
+    public void setCaptionFromUserName(String captionFromUserName) {
+        this.captionFromUserName = captionFromUserName;
+    }
+
+    public String getCaptionFromUserName() {
+        return captionFromUserName;
     }
 }
