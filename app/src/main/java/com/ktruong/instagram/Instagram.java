@@ -147,7 +147,7 @@ public class Instagram extends ActionBarActivity {
 
                         long createLongSec = photoJson.getLong("created_time");
                         CharSequence createdTimeStr = DateUtils.getRelativeTimeSpanString(createLongSec * 1000, System.currentTimeMillis(), DateUtils.HOUR_IN_MILLIS);
-                        instagramPhoto.setCreatedTime(createdTimeStr.toString());
+                        instagramPhoto.setCreatedTime(formatNumbers(createdTimeStr.toString()));
 
                         if (!photoJson.isNull("caption")) {
                             JSONObject captionJson = photoJson.getJSONObject("caption");
@@ -192,5 +192,10 @@ public class Instagram extends ActionBarActivity {
 //                super.onFailure(statusCode, headers, responseString, throwable);
             }
         });
+    }
+
+    private String formatNumbers(String input) {
+        String[] hourTokenizer = input.split(" ");
+        return hourTokenizer[0] + hourTokenizer[1].charAt(0);
     }
 }

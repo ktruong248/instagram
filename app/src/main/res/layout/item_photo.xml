@@ -23,7 +23,9 @@
         android:typeface="serif"
         android:textColor="#ff167bff"
         android:textSize="20sp"
-        android:elegantTextHeight="true" />
+        android:minWidth="100pt"
+        android:elegantTextHeight="true"
+        android:paddingRight="50dp" />
 
 
     <TextView
@@ -34,13 +36,30 @@
         android:id="@+id/createdTime"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignBottom="@+id/userName"
+        android:layout_alignParentEnd="true"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:gravity="center" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxHeight="10dp"
+        android:src="@drawable/clock_128"
+        android:id="@+id/clock"
+        android:paddingTop="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/userName"
+        android:layout_toLeftOf="@+id/createdTime"
+        android:layout_alignBottom="@+id/userName" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/photoImage"
         android:minWidth="50dp"
+        android:minHeight="50dp"
         android:paddingBottom="5dp"
         android:adjustViewBounds="true"
         android:layout_below="@+id/profileImage" />
