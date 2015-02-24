@@ -13,6 +13,7 @@ import com.makeramen.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 /**
@@ -26,6 +27,7 @@ public class InstagramPhotoAdapter extends ArrayAdapter<InstagramPhoto> {
         TextView userNameText;
         TextView createdTimeView;
         ImageView photoImageView;
+        TextView likeCountText;
         TextView captionText;
         TextView captionUserName;
     }
@@ -49,6 +51,7 @@ public class InstagramPhotoAdapter extends ArrayAdapter<InstagramPhoto> {
             viewHolder.captionText = (TextView) convertView.findViewById(R.id.captionText);
             viewHolder.captionUserName = (TextView) convertView.findViewById(R.id.captionUserName);
             viewHolder.photoImageView = (ImageView) convertView.findViewById(R.id.photoImage);
+            viewHolder.likeCountText = (TextView) convertView.findViewById(R.id.likeCounts);
 
             convertView.setTag(viewHolder);
         } else {
@@ -56,7 +59,6 @@ public class InstagramPhotoAdapter extends ArrayAdapter<InstagramPhoto> {
         }
 
         InstagramPhoto item = getItem(position);
-//        ImageView profileImage = (ImageView) convertView.findViewById(R.id.profileImage);
         ImageView profileImage = viewHolder.profileImage;
         profileImage.setImageResource(0); //clear
 
@@ -64,21 +66,16 @@ public class InstagramPhotoAdapter extends ArrayAdapter<InstagramPhoto> {
             Transformation transformation = new RoundedTransformationBuilder()
                     .borderColor(Color.TRANSPARENT).scaleType(ImageView.ScaleType.FIT_CENTER)
                     .borderWidthDp(3)
-//                .cornerRadius(500)
                     .cornerRadiusDp(30)
-//                .oval(true)
                     .build();
-            Picasso.with(getContext()).load(item.getProfileImageUrl()).transform(transformation).resize(150, 0).into(profileImage);
+            Picasso.with(getContext()).load(item.getProfileImageUrl()).transform(transformation).into(profileImage);
         } else {
             profileImage.setImageResource(R.mipmap.ic_launcher);
         }
 
-//        TextView userNameText = (TextView) convertView.findViewById(R.id.userName);
         TextView userNameText = viewHolder.userNameText;
         userNameText.setText(item.getName());
-//        userNameText.setTextColor(Color.BLUE);
 
-//        ImageView photoImageView = (ImageView) convertView.findViewById(R.id.photoImage);
         ImageView photoImageView = viewHolder.photoImageView;
         photoImageView.setImageResource(0);
         if (item.getImageUrl() != null) {
@@ -87,24 +84,20 @@ public class InstagramPhotoAdapter extends ArrayAdapter<InstagramPhoto> {
             photoImageView.setImageResource(R.mipmap.ic_launcher);
         }
 
-//        TextView createdTimeView = (TextView) convertView.findViewById(R.id.createdTime);
+        TextView likeCountText = viewHolder.likeCountText;
+        String format = NumberFormat.getInstance().format(item.getLikeCounts());
+        likeCountText.setText(format + " likes");
+
         TextView createdTimeView = viewHolder.createdTimeView;
         createdTimeView.setText(item.getCreatedTime());
         createdTimeView.setFreezesText(true);
 
-//        TextView captionText = (TextView) convertView.findViewById(R.id.captionText);
         TextView captionText = viewHolder.captionText;
         captionText.setText(item.getCaption());
 
-        //
-
-//        TextView captionUserName = (TextView) convertView.findViewById(R.id.captionUserName);
         TextView captionUserName = viewHolder.captionUserName;
         captionUserName.setText(item.getCaptionFromUserName());
-//
-//        ImageView likeImageView = (ImageView)convertView.findViewById(R.id.likeImage);
-//        Picasso.with(getContext()).load("https://www.iconfinder.com/icons/299063/download/png/128").centerCrop().resize(80,80).into(likeImageView);
-//
+
         return convertView;
     }
 }

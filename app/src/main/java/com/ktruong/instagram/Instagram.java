@@ -64,7 +64,6 @@ public class Instagram extends ActionBarActivity {
                 android.R.color.holo_red_light);
 
         fetchPopularPhotos();
-//        fetchStuffPhotos();
     }
 
     private void fetchStuffPhotos() {
@@ -74,6 +73,7 @@ public class Instagram extends ActionBarActivity {
             instagramPhoto.setCaption("some long caption text " + i);
             instagramPhoto.setUserFullName("my long name " + i);
             instagramPhoto.setName("user" + i);
+            instagramPhoto.setLikesCount(2000);
 
 
             photos.add(instagramPhoto);
@@ -114,18 +114,15 @@ public class Instagram extends ActionBarActivity {
         asyncHttpClient.get(url, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//                super.onSuccess(statusCode, headers, response);
                 Log.i("DEBUG", response.toString());
                 // Remember to CLEAR OUT old items before appending in the new ones
                 instagramPhotoAdapter.clear();
-//                photos = new LinkedList<InstagramPhoto>();
                 try {
                     JSONArray dataArray = response.getJSONArray("data");
                     int size = (dataArray != null) ? dataArray.length() : 0;
                     //02-18 20:21:13.255    2329-2329/com.ktruong.instagram I/INFO﹕ row {"attribution":null,"tags":["getlaqued","laque","laquenailbar"],"location":{"latitude":34.179577975,"longitude":-118.40618637},"comments":{"count":29,"data":[{"created_time":"1424317169","text":"@king_da_shooter22","from":{"username":"060.bando","profile_picture":"https:\/\/igcdn-photos-f-a.akamaihd.net\/hphotos-ak-xfa1\/t51.2885-19\/10832219_1571548766418029_996659391_a.jpg","id":"397261966","full_name":"Call Me NASA🚀"},"id":"923561816847040138"},{"created_time":"1424317755","text":"@dalqertas","from":{"username":"dalzaid","profile_picture":"https:\/\/igcdn-photos-f-a.akamaihd.net\/hphotos-ak-xaf1\/t51.2885-19\/11008266_595115873924421_277496652_a.jpg","id":"34620808","full_name":"danah"},"id":"923566726808353871"},{"created_time":"1424318025","text":"@glitterdreams I want to do this","from":{"username":"karinbobarin","profile_picture":"https:\/\/scontent-a.cdninstagram.com\/hphotos-xaf1\/t51.2885-19\/10914610_775316482559359_94923048_a.jpg","id":"17746834","full_name":"Karin Maltrud"},"id":"923568994534309120"},{"created_time":"1424318194","text":"I love my thick eyebrows it's the beauty of being middle eastern were blessed 🙌🙌 Ty again @laquenailbar for doing an amazing job your amazing marina 😘😘","from":{"username":"connaga","profile_picture":"https:\/\/igcdn-photos-c-a.akamaihd.net\/hphotos-ak-xfa1\/t51.2885-19\/10954700_1542272332688210_216872594_a.jpg","id":"18725500","full_name":"💜 Con Con 💜"},"id":"923570414130052461"},{"created_time":"1424318521","text":"@laquenailbar وين الفرق بالموضوع","from":{"username":"dr.sarah_alaa","profile_picture":"https:\/\/igcdn-photos-h-a.akamaihd.net\/hphotos-ak-xaf1\/t51.2885-19\/10985976_301619716678207_2016950269_a.jpg","id":"1698266990","full_name":"dr.sarah_alaa"},"id":"923573159075528271"},{"created_time":"1424318797","text":"@laquenailbar That looks like @mimigstyle eyebrows ... Great Job 💯✔️","from":{"username":"juicingchangedmylife","profile_picture":"https:\/\/igcdn-photos-e-a.akamaihd.net\/hphotos-ak-xfa1\/t51.2885-19\/10990634_1548067552112164_1599346332_a.jpg","id":"194590796","full_name":"JuicingChangedMyLife💚⚫💛"},"id":"923575475077922576"},{"created_time":"1424319130","text":"@kingmarco20","from":{"username":"priscilla_mz6","profile_picture":"https:\/\/igcdn-photos-g-a.akamaihd.net\/hphotos-ak-xaf1\/t51.2885-19\/10949082_1541243236147622_97025743_a.jpg","id":"319938045","full_name":"Priscilla💅"},"id":"923578265732922392"},{"created_time":"1424319668","text":"this is amazing!","from":{"username":"missfabulousmakeup","profile_picture":"https:\/\/igcdn-photos-g-a.akamaihd.net\/hphotos-ak-xaf1\/t51.2885-19\/10932433_754669384617590_1188584089_a.jpg","id":"968837323","full_name":"✨🎀Alyssa Chambers🎀✨"},"id":"923582778971798856"}]},"filter":"Valencia","created_time":"1424315921","link":"http:\/\/instagram.com\/p\/zRHQ2ayD62\/","likes":{"count":5657,"data":[{"username":"mercycosita","profile_picture":"https:\/\/instagramimages-a.akamaihd.net\/profiles\/profile_175524572_75sq_1398751785.jpg","id":"175524572","full_name":"mercy Paz💋"},{"username":"mamagon68","profile_picture":"https:\/\/instagramimages-a.akamaihd.net\/profiles\/profile_412395147_75sq_1375673134.jpg","id":"412395147","full_name":"Jack"},{"username":"mero_elanany","profile_picture":"https:\/\/igcdn-photos-d-a.akamaihd.net\/hphotos-ak-xfa1\/t51.2885-19\/10950533_862545263766907_237144805_a.jpg","id":"1409609980","full_name":"mero_elanany"},{"username":"johnna_na_na","profile_picture":"https:\/\/igcdn-photos-d-a.akamaihd.net\/hphotos-ak-xap1\/t51.2885-19\/10809624_1501908630094763_82943286_a.jpg","id":"1073953005","full_name":"johnna_na_na"}]},"images":{"low_resolution":{"url":"http:\/\/scontent-a.cdninstagram.com\/hphotos-xaf1\/t51.2885-15\/s306x306\/e15\/11007753_1631564573733027_1852255249_n.jpg","width":306,"height":306},"thumbnail":{"url":"http:\/\/scontent-a.cdninstagram.com\/hphotos-xaf1\/t51.2885-15\/s150x150\/e15\/11007753_1631564573733027_1852255249_n.jpg","width":150,"height":150
                     for (int i = 0; i < size; i++) {
                         JSONObject photoJson = dataArray.getJSONObject(i);
-//                        Log.i("INFO", "row " + photoJson);
                         JSONObject userJson = photoJson.getJSONObject("user");
 
                         InstagramPhoto instagramPhoto = new InstagramPhoto();
@@ -189,7 +186,6 @@ public class Instagram extends ActionBarActivity {
                     photos.add(instagramPhoto);
                 }
                 instagramPhotoAdapter.notifyDataSetChanged();
-//                super.onFailure(statusCode, headers, responseString, throwable);
             }
         });
     }
